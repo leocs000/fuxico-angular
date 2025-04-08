@@ -1,3 +1,40 @@
+/* Estilização da toolbar */
+.toolbar-container {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.back-button {
+  color: white;
+  margin-right: 10px;
+}
+
+.toolbar-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  flex: 1;
+}
+
+/* Botão Voltar */
+.butao {
+  margin-top: 20px;
+  background-color: #007bff; /* Fundo azul */
+  color: white; /* Texto branco */
+  font-weight: bold;
+  font-size: 16px;
+  height: 50px;
+  padding: 0 20px;
+  border-radius: 8px;
+  text-transform: uppercase;
+}
+
+.butao:hover {
+  background-color: #0056b3; /* Fundo azul-escuro ao passar o mouse */
+}
+
 /* Estilização do Menu de Navegação */
 .navigation-menu {
     font-size: 16px;
@@ -89,6 +126,13 @@
     border:none;
   }
   
+  .custom-button:first-child{
+    width: 50px;
+    height: 90%;
+    color: orangered;
+    font-size: 12px;
+  }
+
   .custom-button {
     background-color: #007bff; /* Cor de fundo azul */
     color: white; /* Texto branco */

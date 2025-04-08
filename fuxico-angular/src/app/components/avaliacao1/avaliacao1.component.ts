@@ -1,35 +1,33 @@
-import { Component, Input } from '@angular/core';
-import { NgxStarsModule } from 'ngx-stars';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { NgFor } from '@angular/common';
-import { MatCard, MatCardModule, MatCardTitleGroup } from '@angular/material/card';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCardModule } from '@angular/material/card';
 import { MatDivider } from '@angular/material/divider';
-import { ComentariosComponent } from '../comentarios/comentarios.component';
-import { Router } from '@angular/router';
-import { AvaliacaoService } from '../../services/avaliacao.service';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { Router } from '@angular/router';
+import { NgxStarsModule } from 'ngx-stars';
+import { AvaliacaoService } from '../../services/avaliacao.service';
 
 @Component({
-  selector: 'app-avaliacao',
+  selector: 'app-avaliacao1',
   imports: [NgxStarsModule, MatFormFieldModule, MatInputModule, NgFor, MatCardModule, FormsModule, MatToolbarModule, MatDivider, MatIconModule],
-  templateUrl: './avaliacao.component.html',
-  styleUrl: './avaliacao.component.css'
+  templateUrl: './avaliacao1.component.html',
+  styleUrl: './avaliacao1.component.css'
 })
-export class AvaliacaoComponent {
+export class Avaliacao1Component {
   // Vetor de avaliações
   avaliacoes: any[] = [];
   comentario: string = '';
   itens = [
-    { nome: 'Condição das carteiras e cadeiras', estrelas: 0 },
-    { nome: 'Qualidade dos quadros', estrelas: 0 },
-    { nome: 'Ventilação ou climatização', estrelas: 0 },
-    { nome: 'Iluminação', estrelas: 0 },
-    { nome: 'Estado das paredes e pintura', estrelas: 0 },
-    { nome: 'Organização', estrelas: 0 },
-    { nome: 'Limpeza', estrelas: 0 },
+    { nome: 'Conservação das quadras esportivas', estrelas: 0 },
+    { nome: 'Disponibilidade de espaços para descanso', estrelas: 0 },
+    { nome: 'Limpeza dos ambientes', estrelas: 0 },
+    { nome: 'Quantidade e qualidade de equipamentos esportivos', estrelas: 0 },
+    { nome: 'Segurança', estrelas: 0 },
+
   ];
 
   constructor(private router: Router, private avaliacoesService: AvaliacaoService) {}
@@ -79,6 +77,4 @@ export class AvaliacaoComponent {
   voltar(): void {
     this.router.navigate(['/inicio']); // Voltar para a página inicial
   }
-
 }
-

@@ -1,16 +1,18 @@
-<!-- Menu de Navegação -->
-<mat-toolbar color="primary" class="navigation-menu">
-  <a routerLink="/infraestrutura" class="nav-link">Infraestrutura/</a>
-  <a routerLink="/sala-de-aula" class="nav-link">Sala de Aula/</a>
-  <a routerLink="/questionario" class="nav-link">Avaliar Serviço</a>
+<mat-toolbar color="primary" class="toolbar-container">
+  <button mat-icon-button class="back-button" (click)="voltar()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <span class="toolbar-title">Título da Página</span>
 </mat-toolbar>
 
 <div class="container">
   <h1 class="titulo">Manutenção de salas de aula</h1>
   
   <h6 class="titulo-secao">Como foi sua experiencia hoje?</h6>
+  
   <!-- Botão de upload de imagem -->
-  <button class="custom-button" mat-raised-button (click)="uploadImage()">Upload de Imagem</button>
+  <!-- <button class="custom-button" mat-raised-button (click)="uploadImage()">Upload de Imagem</button> -->
+  
   <input type="file" id="upload" style="display: none;" (change)="onImageUpload($event)"/>
 
   <!-- Textarea para comentário -->
@@ -26,7 +28,7 @@
   <!-- Cabeçalho da Lista -->
   <div class="lista-cabecalho">
     <div class="descricao-header">Itens</div>
-    <div class="estrelas-header">😡 😟 😐 🙂 😍</div>
+    <!-- <div class="estrelas-header">😡 😟 😐 🙂 😍</div> -->
   </div>
   <!-- Lista de itens para avaliação -->
   <div *ngFor="let item of itens; let i = index" class="item-avaliacao">
@@ -47,6 +49,12 @@
     ></ngx-stars>
   </div>
 
+  <button class="custom-button" mat-raised-button (click)="enviarAvaliacao()">
+    Enviar Avaliação
+  </button>
+  
+  <!-- Exibe as avaliações -->
+  
   <!-- Botão para enviar -->
-  <button class="custom-button" mat-raised-button (click)="submitReview()">Enviar Avaliação</button>
+  <!-- <button class="custom-button" mat-raised-button (click)="submitReview()">Enviar Avaliação</button> -->
 </div>
