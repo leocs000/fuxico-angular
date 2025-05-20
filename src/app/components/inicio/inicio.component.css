@@ -1,0 +1,80 @@
+/* Configuração Mobile-First */
+.fuxico-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: #f5f5f5;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Logo grande no topo */
+  .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30%; /* Ocupa 30% da altura da tela */
+    width: 100%;
+    
+    color: darkgray;
+  }
+  
+  .logo h1 {
+    font-size: 48px;
+    font-weight: bold;
+    margin: 0;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  
+  /* Menu de Categorias */
+  .menu {
+    width: 100%;
+    max-width: 600px; /* Para telas maiores */
+  }
+  
+  /* Categoria estilo expansível */
+  .categoria-header {
+    background-color: #ffffff;
+    color: #000;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 15px;
+    border: 1px solid #ddd;
+  }
+  
+  .categoria-header:hover {
+    background-color: #f5f5f5; /* Indica interação */
+  }
+  
+/* Subcategorias */
+.subcategoria-button {
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    color: #333; /* Texto em cinza escuro */
+    background-color: #f0f0f0; /* Fundo cinza claro */
+    border: 1px solid #ddd; /* Borda para destaque */
+    border-radius: 8px; /* Cantos arredondados */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Leve sombra para profundidade */
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.2s; /* Suaviza as interações */
+  }
+  
+  .subcategoria-button:hover {
+    background-color: #e0e0e0; /* Fundo mais escuro ao interagir */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Aumenta a sombra */
+    transform: translateY(-3px); /* Leve elevação */
+  }
+  
+  .subcategoria-button:active {
+    background-color: #d6d6d6; /* Fundo ainda mais escuro ao clicar */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduz a sombra ao clicar */
+    transform: translateY(0); /* Retorna à posição inicial */
+  }
+  
+  .subcategoria-button:focus {
+    outline: 3px solid #007bff; /* Destaque ao focar */
+  }
+  

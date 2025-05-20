@@ -1,0 +1,37 @@
+@startuml Sds
+  class Categoria {
+    - id: string
+    - nome: string
+  }
+
+  class Subcategoria {
+    - id: string
+    - nome: string
+    - categoriaId: string
+  }
+
+  class Topico {
+    - id: string
+    - nome: string
+    - subcategoriaId: string
+  }
+
+  class Avaliacao {
+    - id: string
+    - topicoId: string
+    - alunoId: string
+    - comentario: string
+    - estrelas: int
+  }
+
+  class Curtida {
+    - id: string
+    - avaliacaoId: string
+    - alunoId: string
+  }
+
+  Categoria "1" --> "many" Subcategoria
+  Subcategoria "1" --> "many" Topico
+  Topico "1" --> "many" Avaliacao
+  Avaliacao "1" --> "many" Curtida
+@enduml
