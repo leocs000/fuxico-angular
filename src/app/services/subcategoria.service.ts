@@ -36,7 +36,7 @@ export class SubcategoriaService {
   insert(subcategoria: Subcategoria): Observable<Subcategoria>{
     const data = {
       nome: subcategoria.nome,
-      qtdNoEstoque: subcategoria.categoria.id,
+      idCategoria: subcategoria.categoria.id,
     };
     
     return this.httpClient.post<Subcategoria>(this.baseUrl, data);
@@ -45,7 +45,7 @@ export class SubcategoriaService {
   update(subcategoria: Subcategoria): Observable<Subcategoria>{
     const data = {
       nome: subcategoria.nome,
-      qtdNoEstoque: subcategoria.categoria.id,
+      idCategoria: subcategoria.categoria.id,
     };
     return this.httpClient.put<Subcategoria>(`${this.baseUrl}/${subcategoria.id}`, data);
   }
