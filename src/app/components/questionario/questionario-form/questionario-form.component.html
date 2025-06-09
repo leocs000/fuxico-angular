@@ -1,0 +1,77 @@
+<mat-toolbar color="primary" class="toolbar-title">Cadastro de Questionario</mat-toolbar>
+<div class="form-container">
+    <mat-card>
+        <mat-card-content>
+            <form [formGroup]="formGroup">
+                <mat-form-field appearance="fill" class="full-width-input">
+                    <mat-label>Titulo</mat-label>
+                    <input matInput type="text" formControlName="titulo" #inputNome>
+                    <mat-error *ngIf="formGroup.get('titulo')
+                                   && formGroup.get('titulo')?.invalid
+                                   && formGroup.get('titulo')?.touched">
+                        O nome é obrigatorio.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="full-width-input">
+                    <mat-label>Descrição</mat-label>
+                    <input matInput type="text" formControlName="descricao" #inputNome>
+                    <mat-error *ngIf="formGroup.get('descricao')
+                                   && formGroup.get('descricao')?.invalid
+                                   && formGroup.get('descricao')?.touched">
+                        A descricao é obrigatorio.
+                    </mat-error>
+                </mat-form-field>
+                
+                <div formArrayName="topicos">
+                    <div *ngFor="let topico of topicos.controls; let i = index" [formGroupName]="i">
+                        <mat-form-field appearance="fill">
+                        <mat-label>Nome</mat-label>
+                        <input matInput formControlName="nome">
+                        </mat-form-field>
+
+                        <mat-form-field appearance="fill">
+                        <mat-label>Descrição</mat-label>
+                        <input matInput formControlName="descricao">
+                        </mat-form-field>
+
+                        <mat-form-field appearance="fill">
+                        <mat-label>Estrelas</mat-label>
+                        <input matInput type="number" formControlName="estrelas">
+                        </mat-form-field>
+
+                        <button mat-icon-button color="warn" (click)="topicos.removeAt(i)">
+                        <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+
+                    <button mat-stroked-button color="primary" (click)="topicos.push(criarTopico())">
+                        Adicionar Tópico
+                    </button>
+                </div>
+
+
+            </form>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button
+                    color="primary"
+                    (click)="salvar()"
+                    [disabled]="formGroup.invalid">
+                Salvar
+            </button>
+            <button mat-raised-button
+                    *ngIf="formGroup?.get('id')?.value"
+                    color="warn"
+                    (click)="excluir()"
+                    [disabled]="formGroup.invalid">
+                Excluir
+            </button>
+            <button mat-raised-button
+                    routerLink="/subcategorias">
+                Cancelar
+            </button>
+
+        </mat-card-actions>
+    </mat-card>
+</div>

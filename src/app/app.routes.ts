@@ -8,6 +8,8 @@ import { categoriaResolver } from './components/categoria/resolver/categoria.res
 import { SubcategoriaListComponent } from './components/subcategoria/subcategoria-list/subcategoria-list.component';
 import { SubcategoriaFormComponent } from './components/subcategoria/subcategoria-form/subcategoria-form.component';
 import { subcategoriaResolver } from './components/subcategoria/resolver/subcategoria.resolver';
+import { QuestionarioListComponent } from './components/questionario/questionario-list/questionario-list.component';
+import { QuestionarioFormComponent } from './components/questionario/questionario-form/questionario-form.component';
 
 export const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: 'inicio'},
@@ -22,4 +24,8 @@ export const routes: Routes = [
     { path: 'subcategorias', component: SubcategoriaListComponent, title:'Subcategoria'},
     { path: 'subcategorias/new', component: SubcategoriaFormComponent, title:'Nova Subcategoria'},
     { path: 'subcategorias/edit/:id', component: SubcategoriaFormComponent, resolve: {subcategoria: subcategoriaResolver}},
+
+    { path: 'questionarios', component: QuestionarioListComponent, title:'Questionario'},
+    { path: 'questionarios/new', component: QuestionarioFormComponent, title:'Novo Questionario'},
+    { path: 'questionarios/edit/:id', component: SubcategoriaFormComponent, resolve: {subcategoria: subcategoriaResolver}},
 ];
