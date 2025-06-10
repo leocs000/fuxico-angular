@@ -48,8 +48,9 @@ export class AvaliacaoFormComponent implements OnInit{
         estrelas: 0
       }));
     });
-  }
 
+
+  }
 
   uploadImage(): void {
     const fileInput = document.getElementById('upload') as HTMLElement;

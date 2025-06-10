@@ -6,14 +6,14 @@ import {
   SharedStylesHost
 } from "./chunk-DK5CTAWV.js";
 import {
+  withHttpTransferCache
+} from "./chunk-27VPTM5L.js";
+import {
   CommonModule,
   DomAdapter,
   getDOM,
   setRootDomAdapter
 } from "./chunk-FPT6SYRO.js";
-import {
-  withHttpTransferCache
-} from "./chunk-27VPTM5L.js";
 import {
   DOCUMENT,
   PLATFORM_BROWSER_ID,
@@ -1304,4 +1304,4 @@ export {
    * License: MIT
    *)
 */
-//# sourceMappingURL=chunk-AHKH5Q7C.js.map
+//# sourceMappingURL=chunk-2WUO46PJ.js.map

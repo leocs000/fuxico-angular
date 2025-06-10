@@ -1,39 +1,61 @@
 import { CommonModule, NgFor, NgIf } from '@angular/common';
-import { Component, Input, OnInit  } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDivider, MatDividerModule } from '@angular/material/divider';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgxStarsModule } from 'ngx-stars';
 import { AvaliacaoService } from '../../services/avaliacao.service';
+import { Avaliacao } from '../../models/avaliacao.model';
+import { NgxStarsModule } from 'ngx-stars';
+import { MatDividerModule } from '@angular/material/divider';
+import { Respostas } from '../../models/respostas.model';
 
 @Component({
-  selector: 'app-comentarios',
-  imports: [NgFor, NgIf, NgxStarsModule, MatDividerModule],
-  templateUrl: './comentarios.component.html',
-  styleUrl: './comentarios.component.css'
+  selector: "app-comentarios",
+  imports: [NgFor, NgIf, NgxStarsModule, MatDividerModule, CommonModule],
+  templateUrl: "./comentarios.component.html",
+  styleUrls: ["./comentarios.component.css"],
 })
-export class ComentariosComponent implements OnInit{
-  avaliacoes: any[] = [];
+export class ComentariosComponent implements OnInit {
+  avaliacoes: Avaliacao[] = [];
 
-  constructor(private router: Router, private avaliacoesService: AvaliacaoService) {}
+  constructor(private router: Router, private avaliacaoService: AvaliacaoService) {}
 
   ngOnInit(): void {
-    this.avaliacoes = this.avaliacoesService.getAvaliacoes();
-    console.log('comentario'+this.avaliacoes);
+    this.avaliacaoService.findAll().subscribe(data => {
+      this.avaliacoes = data.map(avaliacao => ({
+        ...avaliacao,
+        expanded: false,
+        mediaEstrelas: this.calcularMediaEstrelas(avaliacao.respostas),
+        nivelToxicidade: this.definirNivelToxicidade(avaliacao.toxicidade)
+      }));
+    });
+  }
+
+  calcularMediaEstrelas(respostas: Respostas[]): number {
+    const totalEstrelas = respostas.reduce((sum, resposta) => sum + resposta.estrela, 0);
+    return respostas.length ? totalEstrelas / respostas.length : 0;
+  }
+
+  definirNivelToxicidade(toxicidade: number): string {
+    if (toxicidade <= 0.25) {
+      return 'baixo';
+    } else if (toxicidade <= 0.5) {
+      return 'moderado';
+    } else if (toxicidade <= 0.75) {
+      return 'alto';
+    } else {
+      return 'muito-alto';
+    }
   }
 
   voltar(): void {
     this.router.navigate(['/avaliacao']); // Voltar para a página inicial
   }
-  
-  //@Input() avaliacoes: any[] = [];
 
-  toggleExpand(avaliacao: any): void {
+  toggleExpand(avaliacao: Avaliacao): void {
     avaliacao.expanded = !avaliacao.expanded;
   }
 }
+
+
+
+
+

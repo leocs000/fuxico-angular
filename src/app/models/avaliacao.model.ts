@@ -9,5 +9,8 @@ export class Avaliacao {
     visibiliadade!: boolean;
     questionario!: Questionario;
     respostas!: Respostas[];
+    expanded?: boolean;
+    mediaEstrelas?: number;
+    nivelToxicidade?: string;
     
 }

@@ -1,62 +1,67 @@
 <div class="comentario-container">
-    <!-- Mensagem de agradecimento -->
-    <div class="mensagem-agradecimento">
-      <h1>Obrigado pela sua avaliação!</h1>
-      <p>Sua opinião é muito importante para nós.</p>
-    </div>
+  <!-- Mensagem de agradecimento -->
+  <div class="mensagem-agradecimento">
+    <h1>Obrigado pela sua avaliação!</h1>
+    <p>Sua opinião é muito importante para nós.</p>
+  </div>
 
-    <button mat-raised-button class="custom-button" (click)="voltar()">Voltar para inicio</button>
-  
-    <!-- Listagem de comentários -->
-    <div class="comentarios-lista">
-      <div *ngFor="let avaliacao of avaliacoes" class="comentario-card">
-        <h2 class="comentario-nome">{{ avaliacao.nome }}</h2>
-        <p class="comentario-media">
-          {{ avaliacao.mediaEstrelas.toFixed(1) }}
-          <ngx-stars
-            [maxStars]="5"
-            [initialStars]="avaliacao.mediaEstrelas"
-            [readonly]="true"
-            [customSize]="'20px'"
-          ></ngx-stars>
-        </p>
-  
-        <!-- Comentário -->
-        <p *ngIf="avaliacao.comentario" class="comentario-resumo">
-          <strong>Comentário:</strong> {{ avaliacao.comentario }}
-        </p>
-  
-        <!-- Botão para expandir -->
-        <button mat-button class="expand-button" (click)="toggleExpand(avaliacao)">
-          {{ avaliacao.expanded ? 'Recolher' : 'Ver Detalhes' }}
-        </button>
-  
-        <!-- Detalhes Expansíveis -->
-        <div *ngIf="avaliacao.expanded" class="comentario-detalhes">
-          <!-- Cabeçalho da Lista -->
-          <div class="lista-cabecalho">
-            <div class="descricao-header">Itens</div>
-          </div>
-  
-          <!-- Lista de Itens Avaliados -->
-          <div *ngFor="let item of avaliacao.detalhes" class="item-avaliacao">
-            <div class="descricao">
-              <span>{{ item.nome }}</span>
-              <mat-divider></mat-divider>
+  <button mat-raised-button class="custom-button" (click)="voltar()">Voltar para inicio</button>
+
+  <!-- Listagem de comentários -->
+  <div class="comentarios-lista">
+    <div *ngFor="let avaliacao of avaliacoes">
+
+      <div class="comentario-card {{ avaliacao.nivelToxicidade }}">
+        <!-- Nível de Toxicidade -->
+        <div class="nivel-toxicidade {{ avaliacao.nivelToxicidade }}">
+          Nivel de Toxicidade do Comentario: {{ avaliacao.nivelToxicidade | titlecase}}
+        </div>
+        <div class="avaliacao">
+          <h2 class="comentario-nome">{{ avaliacao.comentario }}</h2>
+          <p class="comentario-media">
+            {{ avaliacao.mediaEstrelas!.toFixed(1) }}
+            <ngx-stars [maxStars]="5" [initialStars]="avaliacao.mediaEstrelas!" [readonly]="true"
+              [customSize]="'20px'"></ngx-stars>
+          </p>
+
+          <!-- Comentário -->
+          <p *ngIf="avaliacao.comentario" class="comentario-resumo">
+            <strong>Comentário:</strong> {{ avaliacao.comentario }}
+          </p>
+
+          <!-- Botão para expandir -->
+          <button mat-button class="expand-button" (click)="toggleExpand(avaliacao)">
+            {{ avaliacao.expanded ? 'Recolher' : 'Ver Detalhes' }}
+          </button>
+
+          <!-- Detalhes Expansíveis -->
+          <div *ngIf="avaliacao.expanded" class="comentario-detalhes">
+            <!-- Cabeçalho da Lista -->
+            <div class="lista-cabecalho">
+              <div class="descricao-header">Itens Avaliados</div>
             </div>
-            <ngx-stars
-              [maxStars]="5"
-              [initialStars]="item.estrelas"
-              [readonly]="true"
-              [customSize]="'20px'"
-              [color]="'crimson'"
-              [animationSpeed]="150"
-              [animation]="false"
-              [customPadding]="'8px'"
-            ></ngx-stars>
+
+            <!-- Lista de Itens Avaliados -->
+            <div *ngFor="let resposta of avaliacao.respostas" class="item-avaliacao">
+              <div class="descricao">
+                <span>{{ resposta.topico }}</span>
+                <mat-divider></mat-divider>
+              </div>
+              <ngx-stars [maxStars]="5" [initialStars]="resposta.estrela" [readonly]="true" [customSize]="'20px'"
+                [color]="'crimson'" [animationSpeed]="150" [animation]="false" [customPadding]="'8px'"></ngx-stars>
+            </div>
           </div>
         </div>
+
+
+        
+      </div>
+      <!-- Botões Aprovar e Arquivar -->
+      <div class="botoes-rodape">
+        <button class="botao-arquivar">Arquivar</button>
+        <button class="botao-aprovar">Aprovar</button>
       </div>
     </div>
+
   </div>
-  
+</div>
