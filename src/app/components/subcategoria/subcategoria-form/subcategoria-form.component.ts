@@ -107,7 +107,7 @@ export class SubcategoriaFormComponent implements OnInit{
 
       // executando a operacao
       operacao.subscribe({
-        next: (armaCadastrada) => {
+        next: (subcategoriaCadastrada) => {
           this.router.navigateByUrl('/subcategorias');
         },
         error: (error) => {

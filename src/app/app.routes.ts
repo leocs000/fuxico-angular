@@ -10,6 +10,10 @@ import { SubcategoriaFormComponent } from './components/subcategoria/subcategori
 import { subcategoriaResolver } from './components/subcategoria/resolver/subcategoria.resolver';
 import { QuestionarioListComponent } from './components/questionario/questionario-list/questionario-list.component';
 import { QuestionarioFormComponent } from './components/questionario/questionario-form/questionario-form.component';
+import { questionarioResolver } from './components/questionario/resolver/questionario.resolver';
+import { TipoAvaliadorListComponent } from './components/tipo-avaliador/tipo-avaliador-list/tipo-avaliador-list.component';
+import { TipoAvaliadorFormComponent } from './components/tipo-avaliador/tipo-avaliador-form/tipo-avaliador-form.component';
+import { tipoAvaliadorResolver } from './components/tipo-avaliador/resolver/tipo-avaliador.resolver';
 
 export const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: 'inicio'},
@@ -27,5 +31,9 @@ export const routes: Routes = [
 
     { path: 'questionarios', component: QuestionarioListComponent, title:'Questionario'},
     { path: 'questionarios/new', component: QuestionarioFormComponent, title:'Novo Questionario'},
-    { path: 'questionarios/edit/:id', component: SubcategoriaFormComponent, resolve: {subcategoria: subcategoriaResolver}},
+    { path: 'questionarios/edit/:id', component: QuestionarioFormComponent, resolve: {questionario: questionarioResolver}},
+
+    { path: 'tipoavaliador', component: TipoAvaliadorListComponent, title:'Tipo de avaliador'},
+    { path: 'tipoavaliador/new', component: TipoAvaliadorFormComponent, title:'Novo Tipo de avaliador'},
+    { path: 'tipoavaliador/edit/:id', component: TipoAvaliadorFormComponent, resolve: {tipoAvaliador: tipoAvaliadorResolver}},
 ];

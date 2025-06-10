@@ -52,7 +52,7 @@ export class CategoriaService {
     return this.httpClient.put<Categoria>(`${this.baseUrl}/${categoria.id}`, categoria);
   }
 
-  delete(arma: Categoria): Observable<any>{
-    return this.httpClient.delete<Categoria>(`${this.baseUrl}/${arma.id}`);
+  delete(categoria: Categoria): Observable<any>{
+    return this.httpClient.delete<Categoria>(`${this.baseUrl}/${categoria.id}`);
   }
 }

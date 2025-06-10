@@ -1,29 +1,29 @@
 import { NgIf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { MatSelectModule } from '@angular/material/select';
-import { CategoriaService } from '../../../services/categoria.service';
-import { Categoria } from '../../../models/categoria.model';
+import { TipoAvaliadorService } from '../../../services/tipo-avaliador.service';
+import { TipoAvaliador } from '../../../models/tipo-avaliador.model';
 
 @Component({
-  selector: 'app-categoria-form',
+  selector: 'app-tipo-avaliador-form',
   imports: [NgIf, ReactiveFormsModule, MatFormFieldModule,
     MatInputModule, MatButtonModule, MatCardModule, MatToolbarModule,
     RouterModule, MatSelectModule],
-  templateUrl: './categoria-form.component.html',
-  styleUrl: './categoria-form.component.css'
+  templateUrl: './tipo-avaliador-form.component.html',
+  styleUrl: './tipo-avaliador-form.component.css'
 })
-export class CategoriaFormComponent implements OnInit{
+export class TipoAvaliadorFormComponent {
   formGroup: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
-    private categoriaService: CategoriaService,
+    private tipoAvaliadorService: TipoAvaliadorService,
     private router: Router,
     private activatedRoute: ActivatedRoute) {
 
@@ -39,32 +39,32 @@ export class CategoriaFormComponent implements OnInit{
   }
 
   initializeForm(): void{
-    const categoria: Categoria = this.activatedRoute.snapshot.data['categoria'];
-    console.log(categoria);
+    const tipoAvaliador: TipoAvaliador = this.activatedRoute.snapshot.data['tipoAvaliador'];
+    console.log(tipoAvaliador);
 
     this.formGroup = this.formBuilder.group({
-      id:[(categoria && categoria.id) ? categoria.id : null],
-      nome: [(categoria && categoria.nome) ? categoria.nome : '', Validators.required],
+      id:[(tipoAvaliador && tipoAvaliador.id) ? tipoAvaliador.id : null],
+      descricao: [(tipoAvaliador && tipoAvaliador.descricao) ? tipoAvaliador.descricao : '', Validators.required],
     });
   }
 
   salvar() {
     if (this.formGroup.valid) {
-      const categoria = this.formGroup.value;
-      if (categoria.id == null) {
+      const tipoAvaliador = this.formGroup.value;
+      if (tipoAvaliador.id == null) {
         console.log("entrou no new");
-        this.categoriaService.insert(categoria).subscribe({
+        this.tipoAvaliadorService.insert(tipoAvaliador).subscribe({
           next: (grupoCadastrado) => {
-            this.router.navigateByUrl('/categorias');
+            this.router.navigateByUrl('/tipoavaliador');
           },
           error: (err) => {
             console.log('Erro ao Incluir' + JSON.stringify(err));
           }
         });
       } else {
-        this.categoriaService.update(categoria).subscribe({
-          next: (categoriaAlterado) => {
-            this.router.navigateByUrl('/categorias');
+        this.tipoAvaliadorService.update(tipoAvaliador).subscribe({
+          next: (tipoAvaliadorAlterado) => {
+            this.router.navigateByUrl('/tipoavaliador');
           },
           error: (err) => {
             console.log('Erro ao Editar' + JSON.stringify(err));
@@ -76,11 +76,11 @@ export class CategoriaFormComponent implements OnInit{
 
   excluir() {
     if (this.formGroup.valid) {
-      const categoria = this.formGroup.value;
-      if (categoria.id != null) {
-        this.categoriaService.delete(categoria).subscribe({
+      const tipoAvaliador = this.formGroup.value;
+      if (tipoAvaliador.id != null) {
+        this.tipoAvaliadorService.delete(tipoAvaliador).subscribe({
           next: () => {
-            this.router.navigateByUrl('/categorias');
+            this.router.navigateByUrl('/tipoavaliador');
           },
           error: (err) => {
             console.log('Erro ao Excluir' + JSON.stringify(err));

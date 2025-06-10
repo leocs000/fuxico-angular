@@ -12,6 +12,8 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Questionario } from '../../../models/questionario.model';
 import { QuestionarioService } from '../../../services/questionario.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { SubcategoriaService } from '../../../services/subcategoria.service';
+import { Subcategoria } from '../../../models/subcategoria.model';
 
 @Component({
   selector: 'app-questionario-form',
@@ -25,6 +27,7 @@ export class QuestionarioFormComponent implements OnInit{
   formGroup: FormGroup;
 
   questionarios: Questionario[] = [];
+  subcategorias: Subcategoria[] = [];
 
   fileName: string = '';
   selectedFile: File | null = null; 
@@ -32,33 +35,37 @@ export class QuestionarioFormComponent implements OnInit{
 
   constructor(private formBuilder: FormBuilder,
     private questionarioService: QuestionarioService,
+    private subcategoriaService: SubcategoriaService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private location: Location) {
 
     //inicializando
     this.formGroup = this.formBuilder.group({
+      id:[null],
       titulo: ['', Validators.required],
       descricao: [''],
       status: [false],
       dataCriacao: [new Date()],
-      subcategoria: [1, Validators.required],
+      subcategoria: [null, Validators.required],
       topicos: this.formBuilder.array([])
     });
 
   }
 
   ngOnInit(): void {
-    //this.categoriaService.findAll().subscribe(data => {
-    //  this.categorias = data;
-    //  this.initializeForm();
-    //});
+    this.subcategoriaService.findAll().subscribe(data => {
+      this.subcategorias = data;
+      this.initializeForm();
+    });
 
     
   }
 
+
   criarTopico(): FormGroup {
     return this.formBuilder.group({
+      id:[null],
       nome: ['', Validators.required],
       descricao: [''],
       estrelas: [0],
@@ -75,18 +82,38 @@ export class QuestionarioFormComponent implements OnInit{
     this.location.back();
   }
 
-  initializeForm(): void{
-    //const subcategoria: Questionario = this.activatedRoute.snapshot.data['questionario'];
+  initializeForm(): void {
+    const questionario: Questionario = this.activatedRoute.snapshot.data['questionario'];
 
-    //const categoria = this.categorias.find(categoria => categoria.id === (subcategoria?.categoria?.id || null));
+    // Busca a subcategoria correspondente (caso esteja vindo do resolver)
+    const subcategoria = this.subcategorias.find(
+      s => s.id === questionario?.subcategoria?.id
+    );
 
-    //this.formGroup = this.formBuilder.group({
-      //id:[(subcategoria && subcategoria.id) ? subcategoria.id : null],
-      //nome: [(subcategoria && subcategoria.nome) ? subcategoria.nome : '', Validators.required],
-      //categoria: [categoria],
-      
-    //});
+    // Preenche os campos principais do formulário (sem recriar o formGroup)
+    this.formGroup.patchValue({
+      id: questionario?.id ?? null,
+      titulo: questionario?.titulo ?? '',
+      descricao: questionario?.descricao ?? '',
+      status: questionario?.status ?? false,
+      dataCriacao: questionario?.dataCriacao ?? new Date(),
+      subcategoria: subcategoria ?? null
+    });
+
+    // Preenche os tópicos existentes no FormArray
+    if (questionario?.topicos?.length) {
+      questionario.topicos.forEach(t => {
+        this.topicos.push(this.formBuilder.group({
+          id: [t.id],
+          nome: [t.nome ?? '', Validators.required],
+          descricao: [t.descricao ?? ''],
+          estrelas: [t.estrelas ?? 0],
+          idQuestionario: [questionario.id]
+        }));
+      });
+    }
   }
+
 
   tratarErros(errorResponse: HttpErrorResponse) {
 
@@ -113,7 +140,7 @@ export class QuestionarioFormComponent implements OnInit{
     this.formGroup.markAllAsTouched();
     if (this.formGroup.valid) {
       const questionario = this.formGroup.value;
-
+      console.log(questionario);
       // selecionando a operacao (insert ou update)
       const operacao = questionario.id == null
       ? this.questionarioService.insert(questionario)
@@ -121,7 +148,7 @@ export class QuestionarioFormComponent implements OnInit{
 
       // executando a operacao
       operacao.subscribe({
-        next: (armaCadastrada) => {
+        next: (questionarioCadastrada) => {
           this.router.navigateByUrl('/questionarios');
         },
         error: (error) => {

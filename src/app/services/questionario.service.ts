@@ -37,9 +37,10 @@ export class QuestionarioService {
     const data = {
       titulo: questionario.titulo,
       descricao: questionario.descricao,
-      idTopico: questionario.topicos,
+      topicos: questionario.topicos,
+      status: questionario.status,
       dataCriacao: questionario.dataCriacao,
-      idSubCategoria: 1//questionario.subcategoria.id
+      idSubcategoria: questionario.subcategoria.id
     };
     
     return this.httpClient.post<Questionario>(this.baseUrl, data);
@@ -49,15 +50,16 @@ export class QuestionarioService {
     const data = {
       titulo: questionario.titulo,
       descricao: questionario.descricao,
-      idTopico: questionario.topicos,
+      topicos: questionario.topicos,
+      status: questionario.status,
       dataCriacao: questionario.dataCriacao,
-      idSubCategoria: questionario.subcategoria.id
+      idSubcategoria: questionario.subcategoria.id
     };
-    
+    console.log(data);
     return this.httpClient.put<Questionario>(`${this.baseUrl}/${questionario.id}`, data);
   }
 
-  delete(subcategoria: Questionario): Observable<any>{
-    return this.httpClient.delete<Questionario>(`${this.baseUrl}/${subcategoria.id}`);
+  delete(questionario: Questionario): Observable<any>{
+    return this.httpClient.delete<Questionario>(`${this.baseUrl}/${questionario.id}`);
   }
 }

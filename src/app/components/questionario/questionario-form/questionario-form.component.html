@@ -3,6 +3,17 @@
     <mat-card>
         <mat-card-content>
             <form [formGroup]="formGroup">
+                <mat-form-field appearance="fill">
+                    <mat-label>Subcategoria</mat-label>
+                    <mat-select formControlName="subcategoria">
+                        @for (subcategoria of subcategorias; track subcategoria.id) {
+                            <mat-option [value]="subcategoria">
+                                {{subcategoria.nome}}
+                            </mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+
                 <mat-form-field appearance="fill" class="full-width-input">
                     <mat-label>Titulo</mat-label>
                     <input matInput type="text" formControlName="titulo" #inputNome>
@@ -68,7 +79,7 @@
                 Excluir
             </button>
             <button mat-raised-button
-                    routerLink="/subcategorias">
+                    routerLink="/questionarios">
                 Cancelar
             </button>
 
