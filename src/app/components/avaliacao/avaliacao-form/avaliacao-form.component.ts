@@ -26,6 +26,7 @@ export class AvaliacaoFormComponent implements OnInit{
   // Vetor de avaliações
   itens: Topicos[] = [];
   comentario: string = '';
+  avaliacao!: Avaliacao;
 
   constructor(private formBuilder: FormBuilder,
   private avaliacaoService: AvaliacaoService,
@@ -73,8 +74,10 @@ export class AvaliacaoFormComponent implements OnInit{
 
 
   enviarAvaliacao(): void {
-    const avaliacao: Avaliacao = {
-      id: 0,
+    
+    if(this.avaliacao == null){
+      this.avaliacao = {
+      id: null,
       dataAvaliacao: new Date(),
       comentario: this.comentario,
       toxicidade: 0, // pode ser atualizado depois
@@ -82,18 +85,20 @@ export class AvaliacaoFormComponent implements OnInit{
       questionario: this.questionario,
       respostas: this.itens.map(item => ({
           id: 0,
-          avaliacao: avaliacao,
+          avaliacao: new Avaliacao,
           topico: item,
           estrela: item.estrelas,
         })) 
     };
+    }
+    
 
-    if (avaliacao) {
-      console.log(avaliacao);
+    if (this.avaliacao) {
+      console.log(this.avaliacao);
       // selecionando a operacao (insert ou update)
-      const operacao = avaliacao.id == null
-      ? this.avaliacaoService.insert(avaliacao)
-      : this.avaliacaoService.update(avaliacao);
+      const operacao = this.avaliacao.id == null
+      ? this.avaliacaoService.insert(this.avaliacao)
+      : this.avaliacaoService.update(this.avaliacao);
 
       // executando a operacao
       operacao.subscribe({

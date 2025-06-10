@@ -43,8 +43,6 @@ export class AvaliacaoService {
         visibiliadade: avaliacao.visibiliadade,
         idQuestionario: avaliacao.questionario.id,
         respostas: avaliacao.respostas.map(resposta => ({
-          id: resposta.id,
-          idAvaliacao: resposta.avaliacao.id,
           idTopico: resposta.topico.id,
           estrela: resposta.estrela
         })) 

@@ -2,7 +2,7 @@ import { Questionario } from "./questionario.model";
 import { Respostas } from "./respostas.model";
 
 export class Avaliacao {
-    id!: number;
+    id!: number | null;
     dataAvaliacao!: Date;
     comentario!: string;
     toxicidade!: number;
