@@ -3,9 +3,11 @@ import { Respostas } from "./respostas.model";
 
 export class Avaliacao {
     id!: number;
+    dataAvaliacao!: Date;
     comentario!: string;
     toxicidade!: number;
-    visibiliadade!: true;
+    visibiliadade!: boolean;
     questionario!: Questionario;
-    resposta!: Respostas;
+    respostas!: Respostas[];
+    
 }

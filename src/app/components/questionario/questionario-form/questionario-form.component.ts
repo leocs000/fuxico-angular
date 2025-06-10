@@ -14,6 +14,7 @@ import { QuestionarioService } from '../../../services/questionario.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { SubcategoriaService } from '../../../services/subcategoria.service';
 import { Subcategoria } from '../../../models/subcategoria.model';
+import { TopicoService } from '../../../services/topico.service';
 
 @Component({
   selector: 'app-questionario-form',
@@ -36,6 +37,7 @@ export class QuestionarioFormComponent implements OnInit{
   constructor(private formBuilder: FormBuilder,
     private questionarioService: QuestionarioService,
     private subcategoriaService: SubcategoriaService,
+    private topicoService: TopicoService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private location: Location) {
@@ -72,6 +74,27 @@ export class QuestionarioFormComponent implements OnInit{
       idQuestionario: [null]
     });
   }
+
+  removerTopico(index: number): void {
+    const questionario = this.formGroup.value;
+    const topicoFormGroup = this.topicos.at(index);
+    const id = topicoFormGroup.get('id')?.value;
+
+    if (id) {
+      this.topicoService.delete(id).subscribe({
+        next: () => {
+          this.topicos.removeAt(index); // remove visualmente
+        },
+        error: err => {
+          console.error('Erro ao excluir tópico:', err);
+        }
+      });
+    } else {
+      // Se não tem id, é um tópico novo que ainda não foi salvo
+      this.topicos.removeAt(index);
+    }
+  }
+
 
   get topicos() {
     return this.formGroup.get('topicos') as FormArray;

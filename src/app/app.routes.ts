@@ -14,11 +14,12 @@ import { questionarioResolver } from './components/questionario/resolver/questio
 import { TipoAvaliadorListComponent } from './components/tipo-avaliador/tipo-avaliador-list/tipo-avaliador-list.component';
 import { TipoAvaliadorFormComponent } from './components/tipo-avaliador/tipo-avaliador-form/tipo-avaliador-form.component';
 import { tipoAvaliadorResolver } from './components/tipo-avaliador/resolver/tipo-avaliador.resolver';
+import { AvaliacaoFormComponent } from './components/avaliacao/avaliacao-form/avaliacao-form.component';
 
 export const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: 'inicio'},
     { path: 'inicio', component: InicioComponent},
-    { path: 'avaliacao', component: AvaliacaoComponent, title:'Avaliacao'},
+    { path: 'avaliacao', component: AvaliacaoFormComponent, title:'Avaliacao'},
     { path: 'agradecimento', component: ComentariosComponent },
 
     { path: 'categorias', component: CategoriaListComponent, title:'Categoria'},

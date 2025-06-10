@@ -50,7 +50,13 @@ export class QuestionarioService {
     const data = {
       titulo: questionario.titulo,
       descricao: questionario.descricao,
-      topicos: questionario.topicos,
+      topicos: questionario.topicos.map(topico => ({
+        id: topico.id,
+        nome: topico.nome,
+        descricao: topico.descricao,
+        estrelas: topico.estrelas,
+        idQuestionario: questionario.id
+      })),
       status: questionario.status,
       dataCriacao: questionario.dataCriacao,
       idSubcategoria: questionario.subcategoria.id
