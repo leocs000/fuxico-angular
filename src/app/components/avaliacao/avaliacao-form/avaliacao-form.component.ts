@@ -29,7 +29,7 @@ export class AvaliacaoFormComponent implements OnInit{
   comentario: string = '';
   avaliacao!: Avaliacao;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(
   private avaliacaoService: AvaliacaoService,
   private questionarioService: QuestionarioService,
   private router: Router,
@@ -39,20 +39,23 @@ export class AvaliacaoFormComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    const idQuestionario = "1"; // ou pegue da rota
-    this.questionarioService.findById(idQuestionario).subscribe(data => {
-      this.questionario = data;
-      this.itens = data.topicos.map(topico => ({
-        id: topico.id,
-        nome: topico.nome,
-        descricao: topico.descricao,
-        estrelas: 0
-      }));
-      this.initialize();
+    this.activatedRoute.paramMap.subscribe(params => {
+      const idQuestionario = params.get('id');
+      if (idQuestionario) {
+        this.questionarioService.findById(idQuestionario).subscribe(data => {
+          this.questionario = data;
+          this.itens = data.topicos.map(topico => ({
+            id: topico.id,
+            nome: topico.nome,
+            descricao: topico.descricao,
+            estrelas: 0
+          }));
+          this.initialize();
+        });
+      }
     });
-
-
   }
+
 
   initialize(){
     const avaliacao: Avaliacao = this.activatedRoute.snapshot.data['avaliacao'];
@@ -64,7 +67,8 @@ export class AvaliacaoFormComponent implements OnInit{
       visibiliadade: avaliacao.visibiliadade,
       questionario: avaliacao.questionario,
       respostas: avaliacao.respostas,
-      avaliador: avaliacao.avaliador
+      avaliador: avaliacao.avaliador,
+      status: 'pendente'
     };
   }
 
@@ -107,6 +111,7 @@ export class AvaliacaoFormComponent implements OnInit{
           estrela: item.estrelas,
         })), 
       avaliador: new Avaliador,
+      status: 'pendente'
     };
     }
     

@@ -1,0 +1,78 @@
+<div class="avaliacoes-container">
+  <div class="page-header">
+    <h1>Minhas Avaliações</h1>
+    <p class="subtitle">Acompanhe suas avaliações em andamento e concluídas</p>
+  </div>
+
+  <!-- Conteúdo principal -->
+  <div class="avaliacoes-content">
+    <!-- Tabs para separar avaliações -->
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" animationDuration="300ms" class="custom-tabs">
+      <mat-tab>
+        <!-- Listagem de comentários -->
+  <div class="comentarios-lista">
+    <div *ngFor="let avaliacao of avaliacoes">
+
+      <div class="comentario-card {{ avaliacao.nivelToxicidade }}">
+        <!-- Nível de Toxicidade -->
+        <div class="nivel-toxicidade {{ avaliacao.nivelToxicidade }}">
+          
+          <button mat-icon-button color="primary" routerLink="/avaliacoes/edit/{{avaliacao.id}}">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+
+        <div class="avaliacao">
+          <h2 class="comentario-nome">{{ avaliacao.avaliador.nome }}</h2>
+          <p class="comentario-media">
+            {{ avaliacao.mediaEstrelas!.toFixed(1) }}
+            <ngx-stars [maxStars]="5" [initialStars]="avaliacao.mediaEstrelas!" [readonly]="true"
+              [customSize]="'20px'"></ngx-stars>
+          </p>
+
+          <!-- Comentário -->
+          <p *ngIf="avaliacao.comentario" class="comentario-resumo">
+            <strong>Comentário:</strong> {{ avaliacao.comentario }}
+          </p>
+
+          <!-- Botão para expandir -->
+          <button mat-button class="expand-button" (click)="toggleExpand(avaliacao)">
+            {{ avaliacao.expanded ? 'Recolher' : 'Ver Detalhes' }}
+          </button>
+
+          <!-- Detalhes Expansíveis -->
+          <div *ngIf="avaliacao.expanded" class="comentario-detalhes">
+            <!-- Cabeçalho da Lista -->
+            <div class="lista-cabecalho">
+              <div class="descricao-header">Itens Avaliados</div>
+            </div>
+
+            <!-- Lista de Itens Avaliados -->
+            <div *ngFor="let resposta of avaliacao.respostas" class="item-avaliacao">
+              <div class="descricao">
+                <span>{{ resposta.topico }}</span>
+                <mat-divider></mat-divider>
+              </div>
+              <ngx-stars [maxStars]="5" [initialStars]="resposta.estrela" [readonly]="true" [customSize]="'20px'"
+                [color]="'crimson'" [animationSpeed]="150" [animation]="false" [customPadding]="'8px'"></ngx-stars>
+            </div>
+          </div>
+        </div>
+
+
+        
+      </div>
+      
+
+    </div>
+
+  </div>
+      </mat-tab>
+    </mat-tab-group>
+    
+    <!-- Botão flutuante para nova avaliação -->
+    <button mat-fab color="accent" class="fab-button" routerLink="/avaliacoes/new" aria-label="Iniciar nova avaliação">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</div>

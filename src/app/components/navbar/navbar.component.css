@@ -1,0 +1,121 @@
+/* Navbar Component CSS - Mobile First Approach */
+
+/* Estilo base para a navbar (mobile first) */
+.navbar {
+  min-height: 50px;
+  padding: 8px 12px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+/* Estilo para o container do usuário */
+.nav-link.dropdown-toggle {
+  display: flex;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  font-weight: 500;
+  color: #333;
+}
+
+/* Estilo para o ícone do usuário */
+.user-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  margin-right: 6px;
+  object-fit: cover;
+}
+
+/* Estilo para o dropdown */
+.dropdown-menu {
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 6px 0;
+  width: 100%;
+  max-width: 250px;
+}
+
+.dropdown-item {
+  padding: 10px 16px;
+  color: #333;
+  transition: background-color 0.2s;
+  font-size: 0.95rem;
+}
+
+.dropdown-item:hover, 
+.dropdown-item:focus {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Ajustes para mobile */
+.navbar-collapse {
+  margin-top: 8px;
+}
+
+.navbar-nav {
+  width: 100%;
+}
+
+/* Garantir que o dropdown apareça corretamente em mobile */
+.dropdown-menu {
+  position: static;
+  float: none;
+  width: 100%;
+  margin-top: 5px;
+}
+
+/* Melhorias de acessibilidade */
+.nav-link:focus {
+  outline: 2px solid #007bff;
+  outline-offset: 2px;
+}
+
+.dropdown-item:focus {
+  outline: 2px solid #007bff;
+  outline-offset: -2px;
+}
+
+/* Media queries para tablets e acima */
+@media (min-width: 768px) {
+  .navbar {
+    padding: 8px 16px;
+  }
+  
+  .user-icon {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .dropdown-menu {
+    width: auto;
+    min-width: 200px;
+  }
+}
+
+/* Media queries para desktop */
+
+  /* Alinhamento dos itens à direita em desktop */
+  .navbar-nav.ml-auto {
+    margin-left: auto !important;
+    width: auto;
+  }
+  
+  .navbar-collapse {
+    margin-top: 0;
+  }
+  
+  /* Garantir que o dropdown apareça abaixo do item de navegação em desktop */
+  .dropdown-menu {
+    position: absolute;
+    float: left;
+    right: 0;
+    left: auto;
+  }
+  
+  .nav-link.dropdown-toggle:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+

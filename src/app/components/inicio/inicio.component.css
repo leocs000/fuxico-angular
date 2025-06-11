@@ -1,80 +1,166 @@
-/* Configuração Mobile-First */
+/* FUXICO - CSS Mobile First para Questionários (Revisado) */
+
+/* Estilos gerais e container principal */
 .fuxico-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
-    padding: 10px;
-    box-sizing: border-box;
-    background-color: #f5f5f5;
-    font-family: 'Arial', sans-serif;
+  width: 100%;
+  padding: 12px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.content-container {
+  max-width: 100%;
+}
+
+/* Logo - Destacada e garantindo visibilidade */
+.logo {
+  text-align: center;
+  margin: 80px 0 25px 0;
+  padding: 15px;
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.logo h1 {
+  font-size: 2rem;
+  color: #0056b3;
+  margin: 0;
+  padding: 5px 0;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Estilos para o accordion de categorias */
+.menu {
+  width: 100%;
+}
+
+/* Cabeçalho da categoria */
+.categoria-header {
+  background-color: #f5f5f5;
+  border-radius: 4px;
+}
+
+mat-panel-title {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #333;
+}
+
+/* Reduzindo o destaque das subcategorias */
+.subcategoria-list {
+  padding: 0;
+}
+
+.subcategoria-button {
+  font-size: 0.9rem !important;
+  color: #666 !important;
+  opacity: 0.85;
+  padding: 8px 12px !important;
+  text-align: left;
+  display: block;
+  width: 100%;
+  margin: 2px 0;
+  background-color: #f9f9f9;
+  border-left: 3px solid #ddd;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+/* Aumentando o destaque dos questionários */
+.questionario-list {
+  padding: 5px 0 10px 15px;
+}
+
+.questionario-list a {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #0056b3;
+  padding: 12px 15px;
+  margin: 8px 0;
+  text-decoration: none;
+  border-radius: 6px;
+  background-color: #e8f0fe;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+/* Seta indicativa para melhorar UX */
+.questionario-list a::after {
+  content: "›";
+  position: absolute;
+  right: 15px;
+  font-size: 1.5rem;
+  color: #0056b3;
+}
+
+/* Estado ativo e hover para questionários */
+.questionario-list a:hover,
+.questionario-list a:focus,
+.questionario-list a:active {
+  background-color: #d0e0fc;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  transform: translateY(-1px);
+}
+
+/* Melhorias de acessibilidade */
+.questionario-list a:focus {
+  outline: 2px solid #0056b3;
+  outline-offset: 2px;
+}
+
+/* Estilo para painéis expandidos */
+mat-expansion-panel.mat-expanded {
+  margin-bottom: 15px;
+}
+
+mat-expansion-panel.mat-expanded .categoria-header {
+  background-color: #e8f0fe;
+}
+
+/* Ajustes para tablets */
+@media (min-width: 768px) {
+  .fuxico-container {
+    padding: 16px;
   }
   
-  /* Logo grande no topo */
   .logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 30%; /* Ocupa 30% da altura da tela */
-    width: 100%;
-    
-    color: darkgray;
+    padding: 20px;
+    margin-bottom: 30px;
   }
   
   .logo h1 {
-    font-size: 48px;
-    font-weight: bold;
+    font-size: 2.2rem;
+  }
+  
+  .questionario-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px 0 15px 20px;
+  }
+  
+  .questionario-list a {
+    width: calc(50% - 10px);
     margin: 0;
-    text-transform: uppercase;
-    text-align: center;
+  }
+}
+
+/* Ajustes para desktop */
+@media (min-width: 992px) {
+  .content-container {
+    max-width: 900px;
+    margin: 0 auto;
   }
   
-  /* Menu de Categorias */
-  .menu {
-    width: 100%;
-    max-width: 600px; /* Para telas maiores */
+  .questionario-list a {
+    width: calc(33.33% - 10px);
   }
   
-  /* Categoria estilo expansível */
-  .categoria-header {
-    background-color: #ffffff;
-    color: #000;
-    font-weight: bold;
-    font-size: 18px;
-    padding: 15px;
-    border: 1px solid #ddd;
+  .subcategoria-button {
+    display: inline-block;
+    width: auto;
   }
-  
-  .categoria-header:hover {
-    background-color: #f5f5f5; /* Indica interação */
-  }
-  
-/* Subcategorias */
-.subcategoria-button {
-    width: 100%;
-    padding: 15px;
-    font-size: 16px;
-    color: #333; /* Texto em cinza escuro */
-    background-color: #f0f0f0; /* Fundo cinza claro */
-    border: 1px solid #ddd; /* Borda para destaque */
-    border-radius: 8px; /* Cantos arredondados */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Leve sombra para profundidade */
-    transition: background-color 0.3s, box-shadow 0.3s, transform 0.2s; /* Suaviza as interações */
-  }
-  
-  .subcategoria-button:hover {
-    background-color: #e0e0e0; /* Fundo mais escuro ao interagir */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Aumenta a sombra */
-    transform: translateY(-3px); /* Leve elevação */
-  }
-  
-  .subcategoria-button:active {
-    background-color: #d6d6d6; /* Fundo ainda mais escuro ao clicar */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduz a sombra ao clicar */
-    transform: translateY(0); /* Retorna à posição inicial */
-  }
-  
-  .subcategoria-button:focus {
-    outline: 3px solid #007bff; /* Destaque ao focar */
-  }
-  
+}

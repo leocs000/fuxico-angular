@@ -1,6 +1,6 @@
 import { NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -12,30 +12,37 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { TipoAvaliadorService } from '../../../services/tipo-avaliador.service';
 import { TipoAvaliador } from '../../../models/tipo-avaliador.model';
 import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core'
+import { AvaliadorService } from '../../../services/avaliador.service';
+
 
 @Component({
   selector: 'app-cadastro-usuario',
   imports: [NgIf, ReactiveFormsModule, MatFormFieldModule,
     MatInputModule, MatButtonModule, MatCardModule, MatToolbarModule,
-    RouterModule, MatStepperModule, MatSelectModule],
+    RouterModule, MatStepperModule, MatSelectModule, MatIconModule, MatDatepickerModule, MatNativeDateModule],
   templateUrl: './cadastro-usuario.component.html',
   styleUrl: './cadastro-usuario.component.css'
 })
 export class CadastroUsuarioComponent implements OnInit{
-  cadastroForm: FormGroup;
+  formGroup!: FormGroup;
   tiposAvaliador: TipoAvaliador[] = [];
+  hidePassword = true;
 
   constructor(private formbuilder: FormBuilder, 
     private usuarioService: UsuarioService,
+    private avaliadorService: AvaliadorService,
     private tipoAvaliadorService: TipoAvaliadorService,
     private route: Router) {
-      this.cadastroForm = this.formbuilder.group({ 
+      this.formGroup = this.formbuilder.group({ 
         dadosUsuario: this.formbuilder.group({ 
           nome: ['', Validators.required], 
           cpf: ['', Validators.required], 
           email: ['', [Validators.required, Validators.email]], 
           dataNacimento: [''], 
-          SerieAtual: [''], 
+          serieAtual: [''], 
           tipoAvaliador:[null, Validators.required],
           login: ['', Validators.required], 
           senha: ['', Validators.required] 
@@ -52,12 +59,12 @@ export class CadastroUsuarioComponent implements OnInit{
 
   initializeForm(){
 
-    this.cadastroForm = this.formbuilder.group({
+    this.formGroup = this.formbuilder.group({
       tipoAvaliador: [this.tiposAvaliador],
     });
   }
 
-  onSubmit(): void {
+/*   onSubmit(): void {
     const usuario = {
       nome: this.cadastroForm.get('dadosUsuario.nome')?.value,
       cpf: this.cadastroForm.get('dadosUsuario.cpf')?.value,
@@ -75,10 +82,39 @@ export class CadastroUsuarioComponent implements OnInit{
         this.route.navigateByUrl('/login');
       }
     });
+  } */
+
+  salvar() {
+    this.formGroup.markAllAsTouched();
+    if (this.formGroup.valid) {
+      const subcategoria = this.formGroup.value;
+
+      // selecionando a operacao (insert ou update)
+      const operacao = subcategoria.id == null
+      ? this.avaliadorService.insert(subcategoria)
+      : this.avaliadorService.update(subcategoria);
+
+      // executando a operacao
+      operacao.subscribe({
+        next: (subcategoriaCadastrada) => {
+          this.route.navigateByUrl('/subcategorias');
+        },
+        error: (error) => {
+          console.log('Erro ao Salvar' + JSON.stringify(error));
+        }
+      });
+    }
   }
   
+  formatDate(date: any): string {
+    if (!date) return 'Não informado';
+    if (typeof date === 'string') {
+      return new Date(date).toLocaleDateString('pt-BR');
+    }
+    return date.toLocaleDateString('pt-BR'); 
+  }
 
   getFormGroup(controlName: string): FormGroup { 
-    return this.cadastroForm.get(controlName) as FormGroup; 
+    return this.formGroup.get(controlName) as FormGroup; 
   }
 }

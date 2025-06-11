@@ -14,5 +14,7 @@ export class Avaliacao {
     mediaEstrelas?: number;
     nivelToxicidade?: string;
     avaliador!: Avaliador;
-    
+    pontuacao?: number;
+    totalPontos?: number;
+    status!: string;
 }

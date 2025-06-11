@@ -24,10 +24,11 @@ import { LoginUsuarioComponent } from './components/usuario/login-usuario/login-
 import { AlterarSenhaComponent } from './components/usuario/alterar-senha/alterar-senha.component';
 import { authGuard } from './guard/auth.guard';
 import { PerfilComponent } from './components/usuario/perfil/perfil.component';
+import { AvaliacoesUsuarioComponent } from './components/usuario/avaliacoes-usuario/avaliacoes-usuario.component';
 
 export const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: 'inicio'},
-    { path: 'inicio', component: InicioComponent},
+    { path: 'inicio', component: InicioComponent, canActivate: [authGuard]},
     { path: 'cadastro', component: CadastroUsuarioComponent, title: 'Cadastro de usuario'},
     { path: 'login', component: LoginUsuarioComponent, title: 'Entrar'},
     { path: 'perfil', component: PerfilComponent, title: 'Perfil do usuário', canActivate: [authGuard]},
@@ -50,8 +51,10 @@ export const routes: Routes = [
     { path: 'tipoavaliador/edit/:id', component: TipoAvaliadorFormComponent, resolve: {tipoAvaliador: tipoAvaliadorResolver}, canActivate: [authGuard]},
 
     { path: 'avaliacoes', component: ComentariosComponent, title:'Avaliacoes'},
-    { path: 'avaliacoes/new', component: AvaliacaoFormComponent, title:'Nova avaliacao', canActivate: [authGuard]},
+    { path: 'avaliacoes/new/:id', component: AvaliacaoFormComponent, title:'Nova avaliacao', canActivate: [authGuard]},
     { path: 'avaliacoes/edit/:id', component: AvaliacaoFormComponent, resolve: {avaliacao: avaliacaoResolver}, canActivate: [authGuard]},
+
+    { path: 'minhasAvaliacoes', component: AvaliacoesUsuarioComponent, title:'Minhas Avaliacoes'},
 
     { path: 'avaliadores', component: AvaliadorListComponent, title:'Usuarios'},
     { path: 'avaliadores/new', component: AvaliadorFormComponent, title:'Novo usuario', canActivate: [authGuard]},

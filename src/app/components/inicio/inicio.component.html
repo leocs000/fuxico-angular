@@ -1,40 +1,32 @@
 <div class="fuxico-container">
-    <!-- Nome/Logo do Sistema -->
-    <div class="logo">
-      <h1>FUXICO</h1>
+    <div class="content-container">
+        <!-- Nome/Logo do Sistema -->
+        <div class="logo">
+            <h1>FUXICO</h1>
+            <h6>Ferramenta Unificada de Xeque e Informação para Contribuição e Opinião</h6>
+        </div>
+
+        <!-- Categorias e Subcategorias -->
+        <mat-accordion class="menu">
+            <ng-container *ngFor="let categoria of categorias">
+                <mat-expansion-panel [expanded]="true">
+                    <mat-expansion-panel-header class="categoria-header">
+                        <mat-panel-title>{{ categoria.nome }}</mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="subcategoria-list">
+                        <ng-container *ngFor="let subcategoria of categoria.subcategorias">
+                            <button class="subcategoria-button" mat-button [routerLink]="['/avaliacoes/new', subcategoria.id]">
+                                {{ subcategoria.nome }}
+                            </button>
+                            <div class="questionario-list">
+                                <ng-container *ngFor="let questionario of subcategoria.questionarios">
+                                    <a [routerLink]="['/avaliacoes/new', questionario.id]">{{ questionario.nome }}</a>
+                                </ng-container>
+                            </div>
+                        </ng-container>
+                    </div>
+                </mat-expansion-panel>
+            </ng-container>
+        </mat-accordion>
     </div>
-  
-    <!-- Categorias e Subcategorias -->
-    <mat-accordion class="menu">
-      <!-- Categoria 1 -->
-      <mat-expansion-panel expanded>
-        <mat-expansion-panel-header class="categoria-header">
-          <mat-panel-title>Categoria 1</mat-panel-title>
-        </mat-expansion-panel-header>
-        <div class="subcategoria-list">
-          <button class="subcategoria-button" mat-button routerLink="/avaliacao" >
-            Subcategoria 1
-          </button>
-          <button class="subcategoria-button" mat-button routerLink="/avaliacao" >
-            Subcategoria 2
-          </button>
-        </div>
-      </mat-expansion-panel>
-  
-      <!-- Categoria 2 -->
-      <mat-expansion-panel>
-        <mat-expansion-panel-header class="categoria-header">
-          <mat-panel-title>Categoria 2</mat-panel-title>
-        </mat-expansion-panel-header>
-        <div class="subcategoria-list">
-          <button class="subcategoria-button" mat-button routerLink="/avaliacao">
-            Subcategoria 1
-          </button>
-          <button class="subcategoria-button" mat-button routerLink="/avaliacao" >
-            Subcategoria 2
-          </button>
-        </div>
-      </mat-expansion-panel>
-    </mat-accordion>
-  </div>
-  
+</div>

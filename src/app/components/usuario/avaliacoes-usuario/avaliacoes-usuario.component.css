@@ -1,0 +1,541 @@
+/* Avaliações do Usuário - Mobile First CSS */
+
+/* Variáveis de cores e espaçamento */
+:root {
+  --primary-color: #3f51b5;
+  --primary-light: #e8eaf6;
+  --accent-color: #ff4081;
+  --text-color: #333333;
+  --text-secondary: #666666;
+  --background-color: #f5f5f5;
+  --card-color: #ffffff;
+  --error-color: #f44336;
+  --success-color: #4caf50;
+  --warning-color: #ff9800;
+  --border-radius: 8px;
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+}
+
+/* Reset e estilos base */
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  color: var(--text-color);
+  background-color: var(--background-color);
+}
+
+/* Container principal */
+.avaliacoes-container {
+  width: 100%;
+  max-width: 100%;
+  padding: var(--spacing-md);
+  margin: 100px 10px 0px 10px;
+  box-sizing: border-box;
+  position: relative;
+  min-height: 80vh;
+}
+
+/* Cabeçalho da página */
+.page-header {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.page-header h1 {
+  font-size: 1.8rem;
+  margin-bottom: var(--spacing-xs);
+  color: var(--primary-color);
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  margin-top: 0;
+  font-size: 1rem;
+}
+
+/* Loader e mensagens de erro */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing-xl) 0;
+}
+
+.loading-container p {
+  margin-top: var(--spacing-md);
+  color: var(--text-secondary);
+}
+
+.error-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing-xl) 0;
+  text-align: center;
+  color: var(--error-color);
+}
+
+.error-message mat-icon {
+  font-size: 48px;
+  height: 48px;
+  width: 48px;
+  margin-bottom: var(--spacing-md);
+}
+
+/* Customização das tabs */
+.custom-tabs {
+  background-color: var(--card-color);
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tab-label {
+  font-weight: 500;
+}
+
+.tab-badge {
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 0.8rem;
+  margin-left: var(--spacing-sm);
+}
+
+.tab-content {
+  padding: var(--spacing-md);
+}
+
+/* Estado vazio */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing-xl) 0;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.empty-state mat-icon {
+  font-size: 48px;
+  height: 48px;
+  width: 48px;
+  margin-bottom: var(--spacing-md);
+  opacity: 0.7;
+}
+
+.empty-state button {
+  margin-top: var(--spacing-md);
+}
+
+/* Lista de avaliações */
+.avaliacoes-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+/* Cards de avaliação */
+.avaliacao-card {
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.avaliacao-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Cabeçalho do card */
+mat-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: var(--spacing-sm);
+}
+
+.card-title-container {
+  flex: 1;
+}
+
+mat-card-title {
+  font-size: 1.2rem !important;
+  margin-bottom: var(--spacing-xs) !important;
+}
+
+mat-card-subtitle {
+  color: var(--text-secondary) !important;
+  margin-bottom: 0 !important;
+}
+
+/* Chips de status */
+.status-chip {
+  font-size: 0.8rem;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-em-andamento {
+  background-color: var(--warning-color);
+  color: white;
+}
+
+.status-concluida {
+  background-color: var(--success-color);
+  color: white;
+}
+
+/* Informações da avaliação */
+.avaliacao-info {
+  margin: var(--spacing-md) 0;
+}
+
+.info-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--spacing-sm);
+}
+
+.info-label {
+  font-weight: 500;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.info-value {
+  font-size: 1rem;
+  padding-top: var(--spacing-xs);
+}
+
+.pontuacao {
+  display: flex;
+  align-items: center;
+}
+
+.pontuacao-perfeita {
+  color: var(--warning-color);
+  margin-left: var(--spacing-xs);
+}
+
+/* Barra de progresso */
+.progress-container {
+  margin: var(--spacing-md) 0;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-xs);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* Botões de ação */
+mat-card-actions {
+  padding: var(--spacing-sm) var(--spacing-md) !important;
+  display: flex;
+  justify-content: flex-end;
+}
+
+mat-card-actions button {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+/* Botão flutuante */
+.fab-button {
+  position: fixed;
+  bottom: var(--spacing-xl);
+  right: var(--spacing-xl);
+  z-index: 100;
+}
+
+/* Responsividade para tablets */
+@media (min-width: 600px) {
+  .avaliacoes-container {
+    padding: var(--spacing-lg);
+    max-width: 800px;
+  }
+  
+  .info-row {
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .info-label {
+    width: 120px;
+    font-size: 1rem;
+  }
+  
+  .info-value {
+    flex: 1;
+  }
+  
+  .avaliacoes-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-md);
+  }
+}
+
+/* Responsividade para desktop */
+@media (min-width: 960px) {
+  .avaliacoes-container {
+    padding: var(--spacing-xl);
+    max-width: 1200px;
+  }
+  
+  .page-header h1 {
+    font-size: 2.2rem;
+  }
+  
+  .subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .avaliacoes-list {
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  }
+}
+
+/* Acessibilidade - foco visível */
+button:focus, 
+mat-card:focus-within {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Animações suaves */
+.avaliacao-card {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Container geral */
+.comentario-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: 'Arial', sans-serif;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: relative; /* Adicionado para permitir posicionamento absoluto dos filhos */
+}
+
+/* Mensagem de agradecimento */
+.mensagem-agradecimento {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.mensagem-agradecimento h1 {
+  font-size: 28px;
+  color: #4caf50;
+  margin-bottom: 10px;
+}
+
+.mensagem-agradecimento p {
+  font-size: 18px;
+  color: #333;
+}
+
+/* Listagem de comentários */
+.comentarios-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Estilo dos cartões de comentários */
+.comentario-card {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 15px;
+  margin: 15px 30px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  position: relative; /* Adicionado para permitir posicionamento absoluto dos filhos */
+}
+
+.comentario-card.baixo {
+  border: 2px solid #d3d3d3;
+}
+
+.comentario-card.moderado {
+  border: 2px solid #d3d3d3;
+}
+
+.comentario-card.alto {
+  border: 2px solid #d3d3d3;
+}
+
+.comentario-card.muito-alto {
+  border: 2px solid #d3d3d3;
+}
+
+.comentario-nome {
+  font-size: 20px;
+  color: #007bff;
+  margin: 0 0 10px 0;
+}
+
+.comentario-media {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 5px 0;
+}
+
+.comentario-resumo {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.expand-button {
+  margin-top: 10px;
+  color: #007bff;
+  background-color: transparent;
+  border: 1px solid #007bff;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.expand-button:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* Detalhes expansíveis */
+.comentario-detalhes {
+  margin-top: 15px;
+  background-color: #f5f5f5;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px dashed #ccc;
+}
+
+.lista-cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-bottom: 2px solid #ccc;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+.item-avaliacao {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.descricao {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+mat-divider {
+  margin: 0 10px;
+}
+
+button {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  border: none;
+}
+
+.custom-button {
+  background-color: #007bff; /* Cor de fundo azul */
+  color: white; /* Texto branco */
+  font-weight: bold; /* Texto em negrito */
+  font-size: 16px; /* Tamanho da fonte maior */
+  height: 60px; /* Aumenta a altura do botão */
+  padding: 0 20px; /* Ajusta o espaçamento interno */
+  border-radius: 8px; /* Bordas arredondadas */
+  text-transform: uppercase; /* Deixa o texto em maiúsculas */
+}
+
+.custom-button:hover {
+  background-color: #0056b3; /* Cor ao passar o mouse */
+}
+
+/* Nível de Toxicidade */
+.nivel-toxicidade {
+  
+  padding: 5px 5px 10px 5px;
+  border-radius: 5px 5px 0 0;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+  border-bottom: 1px solid;
+
+}
+
+.nivel-toxicidade.baixo {
+  color: green;
+}
+
+.nivel-toxicidade.moderado {
+  color: #efb810;
+  
+}
+
+.nivel-toxicidade.alto {
+  color: orange;
+}
+
+.nivel-toxicidade.muito-alto {
+  color: red;
+}
+
+/* Botões Aprovar e Arquivar */
+.botoes-rodape {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.botao-aprovar, .botao-arquivar {
+  background-color: white;
+  border: 1px solid;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.botao-aprovar {
+  color: green;
+  margin-top: 5px;
+}
+
+.botao-arquivar {
+  color: red;
+  margin-top: 5px;
+}
