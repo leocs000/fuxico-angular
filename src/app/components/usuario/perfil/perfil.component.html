@@ -1,0 +1,62 @@
+<div class="user-details-container">
+    <h2>Detalhes do Usuário</h2>
+    <div class="buttons">
+        <button mat-raised-button color="primary" (click)="editarSenha()">Alterar Senha</button>
+    </div>
+    <div class="user-info">
+      <p><strong>Nome:</strong> {{ avaliador.nome }}</p>
+      <p><strong>CPF:</strong> {{ avaliador.cpf }}</p>
+      <p><strong>Email:</strong> {{ avaliador.email }}</p>
+      <p><strong>Login:</strong> {{ avaliador.usuario.login }}</p>
+    <div class="comentarios-lista">
+    <div *ngFor="let avaliacao of avaliacoes">
+
+      <div class="comentario-card {{ avaliacao.nivelToxicidade }}">
+        <!-- Nível de Toxicidade -->
+        <div class="nivel-toxicidade {{ avaliacao.nivelToxicidade }}">
+          <button mat-icon-button color="primary" routerLink="/avaliacoes/edit/{{avaliacao.id}}">
+            <mat-icon>edit</mat-icon>
+            Editar Avaliacao
+          </button>
+        </div>
+
+        <div class="avaliacao">
+          <h2 class="comentario-nome">{{ avaliacao.comentario }}</h2>
+          <p class="comentario-media">
+            {{ avaliacao.mediaEstrelas!.toFixed(1) }}
+            <ngx-stars [maxStars]="5" [initialStars]="avaliacao.mediaEstrelas!" [readonly]="true"
+              [customSize]="'20px'"></ngx-stars>
+          </p>
+
+          <!-- Comentário -->
+          <p *ngIf="avaliacao.comentario" class="comentario-resumo">
+            <strong>Comentário:</strong> {{ avaliacao.comentario }}
+          </p>
+
+          <!-- Botão para expandir -->
+          <button mat-button class="expand-button" (click)="toggleExpand(avaliacao)">
+            {{ avaliacao.expanded ? 'Recolher' : 'Ver Detalhes' }}
+          </button>
+
+          <!-- Detalhes Expansíveis -->
+          <div *ngIf="avaliacao.expanded" class="comentario-detalhes">
+            <!-- Cabeçalho da Lista -->
+            <div class="lista-cabecalho">
+              <div class="descricao-header">Itens Avaliados</div>
+            </div>
+
+            <!-- Lista de Itens Avaliados -->
+            <div *ngFor="let resposta of avaliacao.respostas" class="item-avaliacao">
+              <div class="descricao">
+                <span>{{ resposta.topico }}</span>
+                <mat-divider></mat-divider>
+              </div>
+              <ngx-stars [maxStars]="5" [initialStars]="resposta.estrela" [readonly]="true" [customSize]="'20px'"
+                [color]="'crimson'" [animationSpeed]="150" [animation]="false" [customPadding]="'8px'"></ngx-stars>
+            </div>
+          </div>
+        </div>
+        </div>
+    </div>
+  </div>
+  

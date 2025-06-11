@@ -3,8 +3,8 @@ import {
   NgClass,
   NgForOf,
   NgStyle
-} from "./chunk-FPT6SYRO.js";
-import "./chunk-IKIZCPXM.js";
+} from "./chunk-GAMBKT2F.js";
+import "./chunk-XZ75XUJI.js";
 import {
   Component,
   EventEmitter,
@@ -29,7 +29,8 @@ import {
   ɵɵrestoreView,
   ɵɵstyleProp,
   ɵɵtemplate
-} from "./chunk-JTOJKM6F.js";
+} from "./chunk-YCA54VN2.js";
+import "./chunk-S35MAB2V.js";
 
 // node_modules/ngx-stars/fesm2020/ngx-stars.mjs
 function NgxStarsComponent_div_2_Template(rf, ctx) {

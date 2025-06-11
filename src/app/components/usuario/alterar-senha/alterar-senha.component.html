@@ -1,0 +1,19 @@
+<div class="change-password-container">
+    <h2>Alterar Senha</h2>
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+      <mat-form-field>
+        <mat-label>Senha Atual</mat-label>
+        <input matInput type="password" formControlName="senhaAtual">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Nova Senha</mat-label>
+        <input matInput type="password" formControlName="novaSenha">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Confirmar Nova Senha</mat-label>
+        <input matInput type="password" formControlName="confirmarNovaSenha">
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">Alterar Senha</button>
+    </form>
+  </div>
+  

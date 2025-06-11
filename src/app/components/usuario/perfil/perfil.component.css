@@ -1,0 +1,50 @@
+.user-details-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #fff;
+  }
+  
+  .user-info {
+    margin-bottom: 20px;
+  }
+  
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  button {
+    margin-top: 10px;
+  }
+
+  .user-orders-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #fff;
+  }
+  
+  .pedido {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+  }
+  
+  .pedido h3 {
+    margin: 0;
+  }
+  
+  .pedido-itens ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .pedido-itens li {
+    margin: 5px 0;
+  }
+  
+  

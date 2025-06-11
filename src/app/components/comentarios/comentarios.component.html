@@ -15,9 +15,13 @@
         <!-- Nível de Toxicidade -->
         <div class="nivel-toxicidade {{ avaliacao.nivelToxicidade }}">
           Nivel de Toxicidade do Comentario: {{ avaliacao.nivelToxicidade | titlecase}}
+          <button mat-icon-button color="primary" routerLink="/avaliacoes/edit/{{avaliacao.id}}">
+            <mat-icon>edit</mat-icon>
+          </button>
         </div>
+
         <div class="avaliacao">
-          <h2 class="comentario-nome">{{ avaliacao.comentario }}</h2>
+          <h2 class="comentario-nome">{{ avaliacao.avaliador.nome }}</h2>
           <p class="comentario-media">
             {{ avaliacao.mediaEstrelas!.toFixed(1) }}
             <ngx-stars [maxStars]="5" [initialStars]="avaliacao.mediaEstrelas!" [readonly]="true"

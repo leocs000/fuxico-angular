@@ -1,15 +1,16 @@
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AvaliacaoService } from '../../services/avaliacao.service';
 import { Avaliacao } from '../../models/avaliacao.model';
 import { NgxStarsModule } from 'ngx-stars';
 import { MatDividerModule } from '@angular/material/divider';
 import { Respostas } from '../../models/respostas.model';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: "app-comentarios",
-  imports: [NgFor, NgIf, NgxStarsModule, MatDividerModule, CommonModule],
+  imports: [NgFor, NgIf, NgxStarsModule, MatDividerModule, CommonModule, MatIcon, RouterModule],
   templateUrl: "./comentarios.component.html",
   styleUrls: ["./comentarios.component.css"],
 })
@@ -47,7 +48,7 @@ export class ComentariosComponent implements OnInit {
   }
 
   voltar(): void {
-    this.router.navigate(['/avaliacao']); // Voltar para a página inicial
+    this.router.navigate(['/avaliacoes/new']); // Voltar para a página inicial
   }
 
   toggleExpand(avaliacao: Avaliacao): void {

@@ -1,3 +1,4 @@
+import { Avaliador } from "./avaliador.model";
 import { Questionario } from "./questionario.model";
 import { Respostas } from "./respostas.model";
 
@@ -12,5 +13,6 @@ export class Avaliacao {
     expanded?: boolean;
     mediaEstrelas?: number;
     nivelToxicidade?: string;
+    avaliador!: Avaliador;
     
 }

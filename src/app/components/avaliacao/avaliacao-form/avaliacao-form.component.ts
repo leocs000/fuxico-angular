@@ -14,6 +14,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { QuestionarioService } from '../../../services/questionario.service';
 import { Topicos } from '../../../models/topicos.model';
 import { Avaliacao } from '../../../models/avaliacao.model';
+import { Avaliador } from '../../../models/avaliador.model';
 
 @Component({
   selector: 'app-avaliacao-form',
@@ -47,9 +48,24 @@ export class AvaliacaoFormComponent implements OnInit{
         descricao: topico.descricao,
         estrelas: 0
       }));
+      this.initialize();
     });
 
 
+  }
+
+  initialize(){
+    const avaliacao: Avaliacao = this.activatedRoute.snapshot.data['avaliacao'];
+    this.avaliacao = {
+      id: avaliacao.id,
+      dataAvaliacao: avaliacao.dataAvaliacao,
+      comentario: avaliacao.comentario,
+      toxicidade: avaliacao.toxicidade, // pode ser atualizado depois
+      visibiliadade: avaliacao.visibiliadade,
+      questionario: avaliacao.questionario,
+      respostas: avaliacao.respostas,
+      avaliador: avaliacao.avaliador
+    };
   }
 
   uploadImage(): void {
@@ -89,7 +105,8 @@ export class AvaliacaoFormComponent implements OnInit{
           avaliacao: new Avaliacao,
           topico: item,
           estrela: item.estrelas,
-        })) 
+        })), 
+      avaliador: new Avaliador,
     };
     }
     
@@ -104,7 +121,7 @@ export class AvaliacaoFormComponent implements OnInit{
       // executando a operacao
       operacao.subscribe({
         next: (avaliacaoCadastrada) => {
-          this.router.navigateByUrl('/agradecimento');
+          this.router.navigateByUrl('/avaliacoes');
           this.comentario = '';
           this.itens.forEach(item => (item.estrelas = 0));
         },

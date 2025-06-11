@@ -1,0 +1,67 @@
+<div class="cadastro-container">
+  <mat-horizontal-stepper [linear]="true" #stepper>
+    <mat-step [stepControl]="getFormGroup('dadosUsuario')">
+      <form [formGroup]="getFormGroup('dadosUsuario')">
+        <ng-template matStepLabel>Dados do Usuário</ng-template>
+        <mat-form-field>
+          <mat-label>Nome</mat-label>
+          <input matInput formControlName="nome">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>CPF</mat-label>
+          <input matInput formControlName="cpf">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Data de Nascimento</mat-label>
+          <input matInput formControlName="dataNacimento">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Serie Atual</mat-label>
+          <input matInput formControlName="serieAtual">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Cargo</mat-label>
+            <mat-select formControlName="tipoAvaliador">
+                @for (tipoAvaliador of tiposAvaliador; track tipoAvaliador.id) {
+                    <mat-option [value]="tipoAvaliador">
+                        {{tipoAvaliador.descricao}}
+                    </mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Login</mat-label>
+          <input matInput formControlName="login">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Senha</mat-label>
+          <input matInput type="password" formControlName="senha">
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Próximo</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Confirmação</ng-template>
+      <p>Revise seus dados antes de enviar:</p>
+      <div>
+        <p><strong>Nome:</strong> {{ cadastroForm.get('dadosUsuario.nome')?.value }}</p>
+        <p><strong>CPF:</strong> {{ cadastroForm.get('dadosUsuario.cpf')?.value }}</p>
+        <p><strong>Email:</strong> {{ cadastroForm.get('dadosUsuario.email')?.value }}</p>
+        <p><strong>Data de Nascimento:</strong> {{ cadastroForm.get('dadosUsuario.dataNacimento')?.value }}</p>
+        <p><strong>Serie Atual:</strong> {{ cadastroForm.get('dadosUsuario.serieAtual')?.value }}</p>
+        <p><strong>Cargo:</strong> {{ cadastroForm.get('dadosUsuario.serieAtual')?.value }}</p>
+        <p><strong>Login:</strong> {{ cadastroForm.get('dadosUsuario.login')?.value }}</p>
+        <div>
+          <button mat-button matStepperPrevious>Voltar</button>
+          <button mat-raised-button color="primary" (click)="onSubmit()">Cadastrar</button>
+        </div>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>

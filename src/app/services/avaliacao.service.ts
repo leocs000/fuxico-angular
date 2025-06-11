@@ -73,7 +73,18 @@ export class AvaliacaoService {
       return this.httpClient.delete<Avaliacao>(`${this.baseUrl}/${avaliacao.id}`);
     }
 
-
+    minhasAvaliacoes(page?: number, pageSize?: number): Observable<Avaliacao[]>{
+      let params = {};
+  
+      if (page !== undefined && pageSize !== undefined) {
+        params = {
+          page: page.toString(),
+          pageSize: pageSize.toString()
+        }
+      }
+  
+      return this.httpClient.get<Avaliacao[]>(`${this.baseUrl}/minhasAvaliacoes`, {params});
+    }
   setAvaliacoes(avaliacao: any): void {
     console.log('avaliacao:'+avaliacao);
     this.avaliacoes.push(avaliacao); // Adiciona nova avaliação
@@ -83,6 +94,7 @@ export class AvaliacaoService {
     console.log('avaliacoes:'+this.avaliacoes);
     return this.avaliacoes; // Retorna todas as avaliações
   }
+  
 
 
 }
